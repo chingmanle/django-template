@@ -29,7 +29,7 @@ pytest: ## run pytest on the backend
 
 .PHONY: bandit
 bandit: ## run pytest on the backend
-	docker-compose run --rm app bandit -r app
+	docker-compose run --rm web bandit -r api myapp
 
 .PHONY: coverage
 coverage: ## run coverage on pytest
@@ -38,15 +38,11 @@ coverage: ## run coverage on pytest
 
 .PHONY: black
 black: ## run black on the codebase
-	docker-compose run --rm app black app
+	docker-compose run --rm web black api myapp
 
 .PHONY: flake8
 flake8: ## run flake8 on the codebase
-	docker-compose run --rm app flake8 app
-
-.PHONY: mypy
-mypy: ## run mypy on the codebase
-	docker-compose run --rm app mypy app
+	docker-compose run --rm web flake8 api myapp
 
 .PHONY: copy-env
 copy-env: ## copy .env.sample to .env

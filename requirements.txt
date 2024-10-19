@@ -3,3 +3,8 @@ djangorestframework>=3.12,<4.0
 psycopg2-binary>=2.9
 
 pytest-cov==4.1.0         # For generating test coverage reports
+
+# Optional - Linting and formatting tools
+black==23.9.1             # Code formatter
+flake8==6.1.0             # Linting tool
+bandit==1.7.0             # Check Security
