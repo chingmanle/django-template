@@ -33,8 +33,8 @@ bandit: ## run pytest on the backend
 
 .PHONY: coverage
 coverage: ## run coverage on pytest
-	docker-compose run --rm app coverage run -m pytest
-	docker-compose run --rm app coverage report
+	docker-compose run web coverage run --source='.' manage.py test
+	docker-compose run --rm web coverage report
 
 .PHONY: black
 black: ## run black on the codebase
@@ -55,7 +55,6 @@ copy-env: ## copy .env.sample to .env
 .PHONY: migrate
 migrate: ## Django migrate
 	docker-compose run web python manage.py migrate
-
 
 .PHONY: help
 help:  ## Print this help information.

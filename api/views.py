@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import HelloSerializer
+from api.serializers import HelloSerializer
 
 class HelloView(APIView):
     def get(self, request):
