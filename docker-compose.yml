@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:13
+    container_name: postgres_db_django
+    volumes:
+      - django_postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    networks:
+      - django_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d mydatabase -h localhost"]
+      interval: 5s
+      retries: 10
+
+  web:
+    build: .
+    container_name: django
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    networks:
+      - django_network
+
+volumes:
+  django_postgres_data:
+
+networks:
+  django_network:
+    driver: bridge
